@@ -139,8 +139,20 @@
 -- GROUP BY request_at;
 
 -- Rank Scores
-SELECT
-    score,
-    DENSE_RANK() OVER (ORDER BY score DESC) AS `rank`
-FROM Scores
-ORDER BY score DESC;
+-- SELECT
+    -- score,
+    -- DENSE_RANK() OVER (ORDER BY score DESC) AS `rank`
+-- FROM Scores
+-- ORDER BY score DESC;
+
+-- Consecutive Numbers
+SELECT DISTINCT
+    l1.num AS ConsecutiveNums
+FROM Logs l1
+JOIN Logs l2
+    ON l1.id = l2.id - 1
+JOIN Logs l3
+    ON l2.id = l3.id - 1
+WHERE
+    l1.num = l2.num
+    AND l2.num = l3.num;
